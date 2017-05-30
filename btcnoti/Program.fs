@@ -7,6 +7,8 @@ module Main =
 
     [<EntryPoint>]
     let main args =
+        UI.printUsage ()
+
         let proxyOp = Proxy.load "config.json"
         UI.printProxyInfo proxyOp
 
