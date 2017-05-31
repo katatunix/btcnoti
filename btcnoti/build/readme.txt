@@ -1,4 +1,4 @@
-Bitcoin price notification (C) 2017 Nghia Bui katatunix@gmail.com
+Bitcoin price notification (c) 2017 Nghia Bui :: katatunix@gmail.com
 
 Usage:
     macOS   : mono btcnoti.exe intervalSec
