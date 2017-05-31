@@ -1,6 +1,6 @@
 *.pdb
 *.mdb
-build/*.xml
+*/build/*.xml
 *proxy.json
 
 # Autosave files
