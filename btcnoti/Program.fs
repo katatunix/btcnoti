@@ -9,7 +9,7 @@ module Main =
     let main args =
         UI.printUsage ()
 
-        let proxyOp = Proxy.load "config.json"
+        let proxyOp = Proxy.load "proxy.json"
         UI.printProxyInfo proxyOp
 
         let interval = UI.parseInterval args
