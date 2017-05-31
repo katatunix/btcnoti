@@ -37,8 +37,8 @@ module UI =
         | None -> printfn "No proxy"
 
     let noti price =
-        let title = "Dau ma gia Bitcoin ne"
-        let msg = sprintf "%.2f USD nha con" price
+        let title = "BITCOIN PRICE UPDATED"
+        let msg = sprintf "1 BTC = %.2f USD" price
         show title msg
 
     let logPrice price =
