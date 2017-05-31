@@ -6,11 +6,17 @@ open Noti
 module UI =
 
     let printUsage () =
-        printfn "Bitcoin price notification (C) 2017 Nghia Bui katatunix@gmail.com"
+        printfn "======================================================================"
+        printfn "Bitcoin price notification (c) 2017 Nghia Bui :: katatunix@gmail.com"
         printfn "Usage:"
         printfn "    macOS   : mono btcnoti.exe intervalSec"
         printfn "    Windows : btcnoti.exe intervalSec"
         printfn "Proxy config: rename proxy_.json to proxy.json and edit it"
+        printfn "For example:"
+        printfn "    btcnoti.exe 10"
+        printfn "    -> the interval of notification is 10 seconds"
+        printfn "Proxy config (if used): rename proxy_.json to proxy.json and edit it"
+        printfn "======================================================================"
 
     let private (|Int|_|) str =
         match System.Int32.TryParse str with
