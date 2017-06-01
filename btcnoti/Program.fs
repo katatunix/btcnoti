@@ -17,7 +17,7 @@ module Main =
 
         while true do
             proxyOp
-            |> CoinDesk.getPrice
+            |> BlockChain.getPrice
             |> map UI.logPrice
             |> map UI.noti
             |> UI.logError
