@@ -7,10 +7,6 @@ open System.Drawing
 
 module Noti =
 
-    let private makeCommandMacOS title msg =
-        "osascript",
-        sprintf """ -e " display notification \"%s\" with title \"%s\" " """ msg title
-
     let showWin title msg =
         use item = new NotifyIcon ()
         item.Visible <- true

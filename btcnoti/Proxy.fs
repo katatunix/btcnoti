@@ -14,7 +14,7 @@ module Proxy =
             |> File.ReadAllText
             |> JsonType.Parse
             |> Some
-        with ex -> None
+        with _ -> None
 
     let private createObject (info : JsonType.Root) =
         let proxy = WebProxy (info.Host, info.Port)
