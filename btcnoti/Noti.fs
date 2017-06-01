@@ -24,6 +24,6 @@ module Noti =
 
     let private isMacOS = Environment.OSVersion.Platform = PlatformID.Unix
 
-    let show title msg =
-        if isMacOS then showMacOS title msg else showWin title msg
+    let show =
+        if isMacOS then showMacOS else showWin
         
