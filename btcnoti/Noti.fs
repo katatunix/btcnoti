@@ -2,6 +2,8 @@
 
 open System
 open System.Diagnostics
+open System.Windows.Forms
+open System.Drawing
 
 module Noti =
 
@@ -9,14 +11,19 @@ module Noti =
         "osascript",
         sprintf """ -e " display notification \"%s\" with title \"%s\" " """ msg title
 
-    let private makeCommandWin title msg =
-        "notifu.exe",
-        sprintf "/p \"%s\" /m \"%s\"" title msg
+    let showWin title msg =
+        use item = new NotifyIcon ()
+        item.Visible <- true
+        item.Icon <- SystemIcons.Information
+        item.ShowBalloonTip (3000, title, msg, ToolTipIcon.Info)
+
+    let showMacOS title msg =
+        (   "osascript",
+            sprintf """ -e " display notification \"%s\" with title \"%s\" " """ msg title )
+        |> Process.Start |> ignore
 
     let private isMacOS = Environment.OSVersion.Platform = PlatformID.Unix
 
-    let makeCommand =
-        if isMacOS then makeCommandMacOS else makeCommandWin
-
     let show title msg =
-        makeCommand title msg |> Process.Start |> ignore
+        if isMacOS then showMacOS title msg else showWin title msg
+        
