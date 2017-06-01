@@ -36,6 +36,7 @@
   </PropertyGroup>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Http.fs" />
@@ -44,7 +45,6 @@
     <Compile Include="Noti.fs" />
     <Compile Include="UI.fs" />
     <Compile Include="Program.fs" />
-    <Content Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

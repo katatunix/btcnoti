@@ -11,7 +11,6 @@ module UI =
         printfn "Usage:"
         printfn "    macOS   : mono btcnoti.exe intervalSec"
         printfn "    Windows : btcnoti.exe intervalSec"
-        printfn "Proxy config: rename proxy_.json to proxy.json and edit it"
         printfn "For example:"
         printfn "    btcnoti.exe 10"
         printfn "    -> the interval of notification is 10 seconds"

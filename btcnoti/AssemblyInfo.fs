@@ -3,12 +3,12 @@ open System.Reflection
 open System.Runtime.CompilerServices
 
 [<assembly: AssemblyTitle("btcnoti")>]
-[<assembly: AssemblyDescription("")>]
+[<assembly: AssemblyDescription("Bitcoin price notification")>]
 [<assembly: AssemblyConfiguration("")>]
-[<assembly: AssemblyCompany("")>]
-[<assembly: AssemblyProduct("")>]
-[<assembly: AssemblyCopyright("")>]
-[<assembly: AssemblyTrademark("")>]
+[<assembly: AssemblyCompany("Nghia Bui")>]
+[<assembly: AssemblyProduct("btcnoti")>]
+[<assembly: AssemblyCopyright("katatunix@gmail.com")>]
+[<assembly: AssemblyTrademark("Nghia Bui")>]
 
 // The assembly version has the format {Major}.{Minor}.{Build}.{Revision}
 
