@@ -37,5 +37,3 @@ module BlockChain =
         |> download proxyOp
         |> map JsonType.Parse
         |> map (fun data -> data.Usd.``15m`` |> float)
-
-    
