@@ -10,8 +10,8 @@ module UI =
         printfn "======================================================================"
         printfn "Bitcoin price notification (c) 2017 Nghia Bui :: katatunix@gmail.com"
         printfn "Usage:"
-        printfn "    macOS   : mono btcnoti.exe intervalSec [EthermineId]"
-        printfn "    Windows : btcnoti.exe intervalSec [EthermineId]"
+        printfn "    macOS   : mono btcnoti.exe intervalSec [ethermineId]"
+        printfn "    Windows : btcnoti.exe intervalSec [ethermineId]"
         printfn "For example:"
         printfn "    btcnoti.exe 30"
         printfn "    -> the interval of notification is 30 seconds"
@@ -24,16 +24,16 @@ module UI =
         let MIN = 30
         match args with
         | [| Int x |] ->
-            { Interval = min x MIN; EthermineId = None }
+            { Interval = max x MIN; EthermineId = None }
         | [| Int x; id |] ->
-            { Interval = min x MIN; EthermineId = Some id }
+            { Interval = max x MIN; EthermineId = Some id }
         | _ ->
             { Interval = MIN; EthermineId = None }
 
     let printArgData data =
         printfn "Interval: %ds" data.Interval
         match data.EthermineId with
-        | Some id -> printfn "EthermineId: %s" id
+        | Some id -> printfn "Ethermine Id: %s" id
         | None -> ()
 
     let printProxyInfo proxyOp =
