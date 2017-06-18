@@ -13,16 +13,23 @@ module Main =
         let proxyOp = Proxy.load "proxy.json"
         UI.printProxyInfo proxyOp
 
-        let interval = UI.parseInterval args
-        UI.printInterval interval
+        let data = UI.parseArgData args
+        UI.printArgData data
 
         while true do
             rop {
                 let! btc = BlockChain.getPriceBTC proxyOp
                 let! eth = CoinMarketCap.getPriceETH proxyOp
-                UI.logPrice btc eth
-                UI.noti btc eth }
+
+                match data.EthermineId with
+                | None ->
+                    UI.logPrice btc eth None
+                    UI.noti btc eth None
+                | Some id ->
+                    let! unpaid = Ethermine.getUnpaid proxyOp id
+                    UI.logPrice btc eth (Some unpaid)
+                    UI.noti btc eth (Some unpaid) }
             |> UI.logError
-            Thread.Sleep (interval * 1000)
+            Thread.Sleep (data.Interval * 1000)
         
         0

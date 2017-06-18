@@ -44,6 +44,7 @@
     <Compile Include="BlockChain.fs" />
     <Compile Include="CoinDesk.fs" />
     <Compile Include="CoinMarketCap.fs" />
+    <Compile Include="Ethermine.fs" />
     <Compile Include="Noti.fs" />
     <Compile Include="UI.fs" />
     <Compile Include="Program.fs" />
