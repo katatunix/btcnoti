@@ -29,10 +29,9 @@ module BlockChain =
   "NZD" : {"15m" : 3364.47, "last" : 3364.47, "buy" : 3357.34, "sell" : 3364.48,  "symbol" : "$"},
   "BRL" : {"15m" : 7691.01, "last" : 7691.01, "buy" : 7674.71, "sell" : 7691.04,  "symbol" : "R$"},
   "RUB" : {"15m" : 135260.28, "last" : 135260.28, "buy" : 134973.71, "sell" : 135260.84,  "symbol" : "RUB"}
-}  """>
+}""">
 
-    
-    let getPrice proxyOp =
+    let getPriceBTC proxyOp =
         "https://blockchain.info/ticker"
         |> download proxyOp
         |> map JsonType.Parse

@@ -1,6 +1,7 @@
 ﻿namespace btcnoti
 
 open System
+open NghiaBui.Common
 open Noti
 
 module UI =
@@ -17,11 +18,6 @@ module UI =
         printfn "Proxy config (if used): rename proxy_.json to proxy.json and edit it"
         printfn "======================================================================"
 
-    let private (|Int|_|) str =
-        match System.Int32.TryParse str with
-        | true, x -> Some x
-        | _ -> None
-
     let parseInterval args =
         match args with
         | [| Int x |] when x >= 10 -> x
@@ -35,14 +31,13 @@ module UI =
         | Some _ -> printfn "Use proxy"
         | None -> printfn "No proxy"
 
-    let noti price =
-        let title = "BITCOIN PRICE UPDATED"
-        let msg = sprintf "1 BTC = %.2f USD" price
+    let noti priceBTC priceETH =
+        let title = "PRICE UPDATED"
+        let msg = sprintf "1 BTC = %.2f USD\n1 ETH = %.2f USD" priceBTC priceETH
         show title msg
 
-    let logPrice price =
-        printfn "[Price] %.2f USD at %O" price DateTime.Now
-        price
+    let logPrice priceBTC priceETH =
+        printfn "[Price] [%O] 1 BTC = %.2f USD | 1 ETH = %.2f USD" DateTime.Now priceBTC priceETH
 
     let logError res =
         match res with Error msg -> printfn "[Error] %s" msg | Ok _ -> ()

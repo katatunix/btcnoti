@@ -2,6 +2,7 @@
 
 open Result
 open System.Threading
+open NghiaBui.Common.Rop
 
 module Main =
 
@@ -16,10 +17,11 @@ module Main =
         UI.printInterval interval
 
         while true do
-            proxyOp
-            |> BlockChain.getPrice
-            |> map UI.logPrice
-            |> map UI.noti
+            rop {
+                let! btc = BlockChain.getPriceBTC proxyOp
+                let! eth = CoinMarketCap.getPriceETH proxyOp
+                UI.logPrice btc eth
+                UI.noti btc eth }
             |> UI.logError
             Thread.Sleep (interval * 1000)
         

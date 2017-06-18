@@ -38,10 +38,12 @@
     <None Include="app.config" />
     <None Include="packages.config" />
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="NghiaBui.Common.fs" />
     <Compile Include="Http.fs" />
     <Compile Include="Proxy.fs" />
     <Compile Include="BlockChain.fs" />
     <Compile Include="CoinDesk.fs" />
+    <Compile Include="CoinMarketCap.fs" />
     <Compile Include="Noti.fs" />
     <Compile Include="UI.fs" />
     <Compile Include="Program.fs" />
@@ -55,13 +57,13 @@
     <Reference Include="System.ValueTuple">
       <HintPath>..\packages\System.ValueTuple.4.3.1\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
-    <Reference Include="FSharp.Core">
-      <HintPath>..\packages\FSharp.Core.4.1.17\lib\net45\FSharp.Core.dll</HintPath>
-    </Reference>
     <Reference Include="FSharp.Data">
       <HintPath>..\packages\FSharp.Data.2.3.3\lib\net40\FSharp.Data.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="FSharp.Core">
+      <HintPath>..\packages\FSharp.Core.4.2.1\lib\net45\FSharp.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
