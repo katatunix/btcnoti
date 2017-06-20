@@ -12,8 +12,13 @@ module Ethermine =
     let private formatUnpaid (x : int64) =
         float x / 1000000000000000000.0
 
-    let getUnpaid proxyOp id =
+    let getUnpaidRes proxyOp id =
         ("https://ethermine.org/api/miner_new/" + id)
         |> download proxyOp
         |> map JsonType.Parse
         |> map (fun data -> data.Unpaid |> formatUnpaid)
+
+    let getUnpaid proxyOp id =
+        match getUnpaidRes proxyOp id with
+        | Ok unpaid -> Some unpaid
+        | Error _ -> None
