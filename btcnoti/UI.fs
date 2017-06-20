@@ -38,7 +38,7 @@ module UI =
     let printArgData data =
         printfn "Interval: %ds" data.Interval
         match data.EthermineId with
-        | Some id -> printfn "Ethermine Id: %s" id
+        | Some id -> printfn "Ethermine ID: %s" id
         | None -> ()
 
     let printProxyInfo (proxyOp : WebProxy option) =
