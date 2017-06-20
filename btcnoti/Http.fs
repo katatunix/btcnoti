@@ -5,7 +5,7 @@ open System.Net
 
 module Http =
 
-    let download (proxyOp : IWebProxy option) link =
+    let download (proxyOp : WebProxy option) link =
         use wc = new WebClient ()
         match proxyOp with
         | Some proxy -> wc.Proxy <- proxy

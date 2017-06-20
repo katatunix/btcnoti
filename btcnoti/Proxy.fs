@@ -19,7 +19,7 @@ module Proxy =
     let private createObject (info : JsonType.Root) =
         let proxy = WebProxy (info.Host, info.Port)
         proxy.Credentials <- NetworkCredential (info.Username, info.Password)
-        proxy :> IWebProxy
+        proxy
 
     let load file =
         file |> loadInfo |> Option.map createObject

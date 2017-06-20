@@ -48,6 +48,7 @@
     <Compile Include="Noti.fs" />
     <Compile Include="UI.fs" />
     <Compile Include="Program.fs" />
+    <None Include="Script.fsx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

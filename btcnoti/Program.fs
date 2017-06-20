@@ -29,7 +29,9 @@ module Main =
                     let! unpaid = Ethermine.getUnpaid proxyOp id
                     UI.logPrice btc eth (Some unpaid)
                     UI.noti btc eth (Some unpaid) }
+
             |> UI.logError
+
             Thread.Sleep (data.Interval * 1000)
         
         0
