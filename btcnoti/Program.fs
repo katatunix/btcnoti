@@ -20,10 +20,11 @@ module Main =
             rop {
                 let! btc = BlockChain.getPriceBTC proxyOp
                 let! eth = CoinMarketCap.getPriceETH proxyOp
-                let unpaid = data.EthermineId |> Option.bind (Ethermine.getUnpaid proxyOp)
+                let ethermineInfo = data.EthermineId
+                                    |> Option.bind (Ethermine.getEthermineInfo proxyOp)
 
-                UI.logPrice btc eth unpaid
-                UI.noti btc eth unpaid }
+                UI.logInfo  btc eth ethermineInfo
+                UI.noti     btc eth ethermineInfo }
 
             |> UI.logError
 

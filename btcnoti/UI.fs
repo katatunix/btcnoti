@@ -3,7 +3,9 @@
 open System
 open System.Net
 open NghiaBui.Common
+
 open Noti
+open Ethermine
 
 module UI =
 
@@ -46,19 +48,23 @@ module UI =
         | Some proxy -> printfn "Use proxy: %s" (proxy.Address.ToString ())
         | None -> printfn "No proxy"
 
-    let noti priceBTC priceETH ethermineUnpaid =
-        let title = "BTCNOTI UPDATED"
-        let msg = sprintf "1 BTC = %.2f USD | 1 ETH = %.2f USD" priceBTC priceETH
-        let msg = match ethermineUnpaid with
-                    | None -> msg
-                    | Some unpaid -> sprintf "%s | Ethermine Unpaid = %.5f ETH" msg unpaid
-        show title msg
+    let private makeMsgText priceBTC priceETH (mInfo : MiningInfo option) =
+        let msg = sprintf "BTC: %.2f USD | ETH: %.2f USD" priceBTC priceETH
+        match mInfo with
+        | None ->
+            msg
+        | Some info ->
+            sprintf "%s | EffHR: %s; EthPerDay: %.5f; Unpaid: %.5f ETH"
+                msg info.EffectiveHashRate info.EthPerDay info.Unpaid
 
-    let logPrice priceBTC priceETH ethermineUnpaid =
-        printf "[%O] 1 BTC = %.2f USD | 1 ETH = %.2f USD" DateTime.Now priceBTC priceETH
-        match ethermineUnpaid with
-        | None -> printfn ""
-        | Some unpaid -> printfn " | Ethermine Unpaid = %.5f ETH" unpaid
+    let noti priceBTC priceETH (mInfo : MiningInfo option) =
+        let title = "BTCNOTI UPDATED"
+        show title (makeMsgText priceBTC priceETH mInfo)
+
+    let logInfo priceBTC priceETH (mInfo : MiningInfo option) =
+        printfn "[%O] %s" DateTime.Now (makeMsgText priceBTC priceETH mInfo)
 
     let logError res =
-        match res with Error msg -> printfn "[Error] %s" msg | Ok _ -> ()
+        match res with
+        | Error msg -> printfn "%s" msg
+        | Ok _ -> ()
