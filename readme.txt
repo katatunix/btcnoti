@@ -1,8 +1,8 @@
 Notification for Bitcoin/Ethereum and related stuff
 (c) 2017 Nghia Bui :: katatunix@gmail.com
 Usage:
-    macOS   : mono btcnoti.exe [intervalSec] [ethermineId]
-    Windows : btcnoti.exe [intervalSec] [ethermineId]
+    macOS   : mono btcnoti.exe [intervalSec] [ethermineId_1] [ethermineId_2] ...
+    Windows : btcnoti.exe [intervalSec] [ethermineId_1] [ethermineId_2] ...
 intervalSec: interval of notification in seconds, default (and minimum) is 30
 ethermineId: ID of Ethermine.org miner account, this is optional
 For example:

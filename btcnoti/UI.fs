@@ -4,7 +4,6 @@ open System
 open System.Net
 open NghiaBui.Common
 
-open Noti
 open Ethermine
 
 module UI =
@@ -14,8 +13,8 @@ module UI =
         printfn "Notification for Bitcoin/Ethereum and related stuff"
         printfn "(c) 2017 Nghia Bui :: katatunix@gmail.com"
         printfn "Usage:"
-        printfn "    macOS   : mono btcnoti.exe [intervalSec] [ethermineId]"
-        printfn "    Windows : btcnoti.exe [intervalSec] [ethermineId]"
+        printfn "    macOS   : mono btcnoti.exe [intervalSec] [ethermineId_1] [ethermineId_2] ..."
+        printfn "    Windows : btcnoti.exe [intervalSec] [ethermineId_1] [ethermineId_2] ..."
         printfn "intervalSec: interval of notification in seconds, default (and minimum) is 30"
         printfn "ethermineId: ID of Ethermine.org miner account, this is optional"
         printfn "For example:"
@@ -25,23 +24,22 @@ module UI =
         printfn "Proxy config (if used): rename proxy_.json to proxy.json and edit it"
         printfn "=================================================================================="
 
-    type ArgData = { Interval : int; EthermineId : string option }
+    type ArgData = { Interval : int; EthermineIds : string [] }
 
     let parseArgData args =
-        let MIN = 30
+        let MIN_INTERVAL = 30
         match args with
-        | [| Int x |] ->
-            { Interval = max x MIN; EthermineId = None }
-        | [| Int x; id |] ->
-            { Interval = max x MIN; EthermineId = Some id }
+        | Array (Int i, ids) ->
+            {   Interval = max i MIN_INTERVAL
+                EthermineIds = ids }
         | _ ->
-            { Interval = MIN; EthermineId = None }
+            {   Interval = MIN_INTERVAL
+                EthermineIds = Array.empty }
 
     let printArgData data =
         printfn "Interval: %ds" data.Interval
-        match data.EthermineId with
-        | Some id -> printfn "Ethermine ID: %s" id
-        | None -> ()
+        if data.EthermineIds.Length > 0 then
+            printfn "Ethermine IDs: %s" (data.EthermineIds |> String.concat " ")
 
     let printProxyInfo (proxyOp : WebProxy option) =
         match proxyOp with
@@ -51,21 +49,25 @@ module UI =
     let private makePriceText btcPrice ethPrice =
         sprintf "BTC: %.2f USD | ETH: %.2f USD" btcPrice ethPrice
 
-    let private makeMsgText btcPrice ethPrice (miningInfo : MiningInfo option) =
-        let msg = makePriceText btcPrice ethPrice
-        match miningInfo with
-        | None ->
-            msg
-        | Some info ->
-            sprintf "%s | EffHR: %s; EthPerDay: %.5f; Unpaid: %.5f ETH"
-                msg info.EffectiveHashRate info.EthPerDay info.Unpaid
+    let private makeLogText btcPrice ethPrice (miningInfos : MiningInfo []) =
+        let SEP = "\n    "
+        let priceMsg = makePriceText btcPrice ethPrice
+        let miningMsg =
+            miningInfos
+            |> Array.map (fun info -> sprintf "Id: %s | EffHR: %s | EthPerDay: %.5f | Unpaid: %.5f ETH"
+                                        info.Id info.EffectiveHashRate info.EthPerDay info.Unpaid)
+            |> String.concat SEP
+        if miningMsg.Length = 0 then
+            priceMsg
+        else
+            priceMsg + SEP + miningMsg
 
     let noti btcPrice ethPrice =
         let title = "BTCNOTI UPDATED"
-        show title (makePriceText btcPrice ethPrice)
+        Noti.show title (makePriceText btcPrice ethPrice)
 
     let log btcPrice ethPrice miningInfo =
-        printfn "[%O] %s" DateTime.Now (makeMsgText btcPrice ethPrice miningInfo)
+        printfn "[%O] %s" DateTime.Now (makeLogText btcPrice ethPrice miningInfo)
 
     let logError res =
         match res with
