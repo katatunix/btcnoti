@@ -26,7 +26,7 @@ module CoinMarketCap =
     }
 ]""">
 
-    let getPriceETH proxyOp =
+    let getEthPrice proxyOp =
         "http://api.coinmarketcap.com/v1/ticker/ethereum/"
         |> download proxyOp
         |> map JsonType.Parse

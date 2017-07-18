@@ -18,13 +18,13 @@ module Main =
 
         while true do
             rop {
-                let! btc = BlockChain.getPriceBTC proxyOp
-                let! eth = CoinMarketCap.getPriceETH proxyOp
+                let! btcPrice = BlockChainInfo.getBtcPrice proxyOp
+                let! ethPrice = CoinMarketCap.getEthPrice proxyOp
                 let ethermineInfo = data.EthermineId
                                     |> Option.bind (Ethermine.getEthermineInfo proxyOp)
 
-                UI.logInfo  btc eth ethermineInfo
-                UI.noti     btc eth ethermineInfo }
+                UI.log btcPrice ethPrice ethermineInfo
+                UI.noti btcPrice ethPrice }
 
             |> UI.logError
 

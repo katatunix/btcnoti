@@ -48,21 +48,24 @@ module UI =
         | Some proxy -> printfn "Use proxy: %s" (proxy.Address.ToString ())
         | None -> printfn "No proxy"
 
-    let private makeMsgText priceBTC priceETH (mInfo : MiningInfo option) =
-        let msg = sprintf "BTC: %.2f USD | ETH: %.2f USD" priceBTC priceETH
-        match mInfo with
+    let private makePriceText btcPrice ethPrice =
+        sprintf "BTC: %.2f USD | ETH: %.2f USD" btcPrice ethPrice
+
+    let private makeMsgText btcPrice ethPrice (miningInfo : MiningInfo option) =
+        let msg = makePriceText btcPrice ethPrice
+        match miningInfo with
         | None ->
             msg
         | Some info ->
             sprintf "%s | EffHR: %s; EthPerDay: %.5f; Unpaid: %.5f ETH"
                 msg info.EffectiveHashRate info.EthPerDay info.Unpaid
 
-    let noti priceBTC priceETH (mInfo : MiningInfo option) =
+    let noti btcPrice ethPrice =
         let title = "BTCNOTI UPDATED"
-        show title (makeMsgText priceBTC priceETH mInfo)
+        show title (makePriceText btcPrice ethPrice)
 
-    let logInfo priceBTC priceETH (mInfo : MiningInfo option) =
-        printfn "[%O] %s" DateTime.Now (makeMsgText priceBTC priceETH mInfo)
+    let log btcPrice ethPrice miningInfo =
+        printfn "[%O] %s" DateTime.Now (makeMsgText btcPrice ethPrice miningInfo)
 
     let logError res =
         match res with

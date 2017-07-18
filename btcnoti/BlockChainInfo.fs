@@ -4,7 +4,8 @@ open Result
 open Http
 open FSharp.Data
 
-module BlockChain =
+module BlockChainInfo =
+
     type private JsonType = JsonProvider<"""
 {
   "USD" : {"15m" : 2383.63, "last" : 2383.63, "buy" : 2378.58, "sell" : 2383.64,  "symbol" : "$"},
@@ -31,7 +32,7 @@ module BlockChain =
   "RUB" : {"15m" : 135260.28, "last" : 135260.28, "buy" : 134973.71, "sell" : 135260.84,  "symbol" : "RUB"}
 }""">
 
-    let getPriceBTC proxyOp =
+    let getBtcPrice proxyOp =
         "https://blockchain.info/ticker"
         |> download proxyOp
         |> map JsonType.Parse

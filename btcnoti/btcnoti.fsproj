@@ -41,7 +41,7 @@
     <Compile Include="NghiaBui.Common.fs" />
     <Compile Include="Http.fs" />
     <Compile Include="Proxy.fs" />
-    <Compile Include="BlockChain.fs" />
+    <Compile Include="BlockChainInfo.fs" />
     <Compile Include="CoinDesk.fs" />
     <Compile Include="CoinMarketCap.fs" />
     <Compile Include="Ethermine.fs" />
