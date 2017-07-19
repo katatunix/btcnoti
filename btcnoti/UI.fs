@@ -49,14 +49,16 @@ module UI =
     let private makePriceText btcPrice ethPrice =
         sprintf "BTC: %.2f USD | ETH: %.2f USD" btcPrice ethPrice
 
-    let private makeLogText btcPrice ethPrice (miningInfos : MiningInfo []) =
-        let SEP = "\n    "
+    let private makeLogText btcPrice ethPrice miningInfos =
         let priceMsg = makePriceText btcPrice ethPrice
+
+        let SEP = "\n    "
         let miningMsg =
             miningInfos
-            |> Array.map (fun info -> sprintf "Id: %s | EffHR: %s | EthPerDay: %.5f | Unpaid: %.5f ETH"
+            |> Array.map (fun info -> sprintf "%s | EffHR: %s | EthPerDay: %.5f | Unpaid: %.5f ETH"
                                         info.Id info.EffectiveHashRate info.EthPerDay info.Unpaid)
             |> String.concat SEP
+
         if miningMsg.Length = 0 then
             priceMsg
         else
